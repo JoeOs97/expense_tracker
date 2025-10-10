@@ -41,6 +41,7 @@ dependencies:
   path_provider: ^2.1.5
   fl_chart: ^1.1.1
   intl: ^0.19.0
+  syncfusion_flutter_charts: ^31.1.23
 
 dev_dependencies:
   flutter_test:
