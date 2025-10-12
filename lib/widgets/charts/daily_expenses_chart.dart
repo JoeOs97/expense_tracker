@@ -65,7 +65,7 @@ class DailyExpensesChart extends StatelessWidget {
             xValueMapper: (_DailyData d, _) => d.label,
             yValueMapper: (_DailyData d, _) => d.amount,
             borderRadius: BorderRadius.circular(5),
-            width: 0.05,
+            width: 0.2,
             color: const Color(0xFF0083B0),
             spacing: 0.2,
             dataLabelSettings: const DataLabelSettings(isVisible: false),

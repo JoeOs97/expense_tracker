@@ -8,26 +8,33 @@ class CategoryViewModel extends StateNotifier<List<Category>> {
   final IsarService _isarService;
 
   CategoryViewModel(this._isarService) : super([]) {
-    _init(); // call initialization logic when the viewmodel is created
+    _init();
   }
 
   Future<void> _init() async {
-    // 1️⃣ Seed preset categories if this is the first run
     await _isarService.seedPresetCategories();
 
-    // 2️⃣ Then load all categories from Isar
-    await loadCategories();
+    // ⚡ Default to loading expense categories so AddExpensePage works
+    await loadCategories(CategoryType.expense);
+    await loadCategories(CategoryType.income);
   }
 
-  Future<void> loadCategories() async {
-    final categories = await _isarService.getCategories();
-    state = categories;
+
+
+  // ⚡ Minimal change: pass type
+  Future<void> loadCategories(CategoryType type) async {
+    final categories = (type == CategoryType.expense)
+        ? await _isarService.getExpenseCategories()
+        : await _isarService.getIncomeCategories();
+
+    // Append to state without duplicating
+    state = [
+      ...state.where((c) => c.type != type), // remove old of same type
+      ...categories,
+    ];
   }
 
-  Future<void> addCategory(Category category) async {
-    await _isarService.addCategory(category);
-    await loadCategories();
-  }
+
 }
 
 final categoryViewModelProvider =

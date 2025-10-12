@@ -84,6 +84,23 @@ class ExpenseListPage extends ConsumerWidget {
                 }
               }
             },
+            onUpdate: () async {
+              if (tx.isIncome) {
+                // navigate to income edit page
+                Navigator.pushNamed(
+                  context,
+                  '/add-income',
+                  arguments: tx.object,
+                );
+              } else {
+                // navigate to expense edit page
+                Navigator.pushNamed(
+                  context,
+                  '/add',
+                  arguments: tx.object,
+                );
+              }
+            },
           );
         },
       ),

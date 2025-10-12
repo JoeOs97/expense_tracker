@@ -7,6 +7,7 @@ import '../widgets/balance_overview_card.dart';
 import '../widgets/categoryItemTotal.dart';
 import '../widgets/expense_item.dart';
 import '../viewmodels/totals_provider.dart';
+import 'category_chart_card.dart';
 
 class Homepage extends ConsumerWidget {
   const Homepage({super.key});
@@ -30,6 +31,7 @@ class Homepage extends ConsumerWidget {
       ...expenses.map((e) => {'type': 'expense', 'data': e}),
       ...incomes.map((i) => {'type': 'income', 'data': i}),
     ];
+
 
     // ✅ Sort by most recent date
     transactions.sort((a, b) {
@@ -114,64 +116,77 @@ class Homepage extends ConsumerWidget {
                   crossAxisSpacing: 10,
                 ),
                 itemCount: sortedEntries.length,
-                itemBuilder: (context, index) {
-                  final entry = sortedEntries[index];
-                  final name = entry.key;
-                  final total = entry.value;
+                  itemBuilder: (context, index) {
+                    final entry = sortedEntries[index];
+                    final name = entry.key;
+                    final total = entry.value;
 
-                  IconData icon;
-                  switch (name.toLowerCase()) {
-                    case 'food':
-                      icon = Icons.fastfood;
-                      break;
-                    case 'transport':
-                      icon = Icons.directions_car;
-                      break;
-                    case 'shopping':
-                      icon = Icons.shopping_bag;
-                      break;
-                    case 'entertainment':
-                      icon = Icons.movie;
-                      break;
-                    case 'utilities':
-                      icon = Icons.lightbulb;
-                      break;
-                    case 'health':
-                      icon = Icons.health_and_safety;
-                      break;
-                    case 'education':
-                      icon = Icons.menu_book_outlined;
-                      break;
-                    case 'housing':
-                      icon = Icons.home;
-                      break;
-                    case 'travel':
-                      icon = Icons.airplanemode_active;
-                      break;
-                    case 'gifts':
-                      icon = Icons.card_giftcard;
-                      break;
-                    case 'insurance':
-                      icon = Icons.attach_money;
-                      break;
-                    case 'savings':
-                      icon = Icons.savings;
-                      break;
-                    default:
-                      icon = Icons.category;
-                  }
+                    // 🧮 Clean formatting (removes trailing zeros)
+                    final formattedTotal = total % 1 == 0
+                        ? total.toStringAsFixed(0)
+                        : total.toStringAsFixed(2);
 
-                  final textColor = total > 0 ? Colors.green : Colors.grey;
+                    IconData icon;
+                    switch (name.toLowerCase()) {
+                      case 'food':
+                        icon = Icons.fastfood;
+                        break;
+                      case 'transport':
+                        icon = Icons.directions_car;
+                        break;
+                      case 'shopping':
+                        icon = Icons.shopping_bag;
+                        break;
+                      case 'entertainment':
+                        icon = Icons.movie;
+                        break;
+                      case 'utilities':
+                        icon = Icons.lightbulb;
+                        break;
+                      case 'health':
+                        icon = Icons.health_and_safety;
+                        break;
+                      case 'education':
+                        icon = Icons.menu_book_outlined;
+                        break;
+                      case 'housing':
+                        icon = Icons.home;
+                        break;
+                      case 'travel':
+                        icon = Icons.airplanemode_active;
+                        break;
+                      case 'gifts':
+                        icon = Icons.card_giftcard;
+                        break;
+                      case 'insurance':
+                        icon = Icons.attach_money;
+                        break;
+                      case 'savings':
+                        icon = Icons.savings;
+                        break;
+                      default:
+                        icon = Icons.category;
+                    }
 
-                  return CategoryCard(
-                    categoryName: name,
-                    totalSpent: total,
-                    icon: icon,
-                    color: Colors.teal,
-                    onTap: () => print('Tapped $name'),
-                    textColor: textColor,
-                  );
-                },
+                    final textColor = total > 0 ? Colors.green : Colors.grey;
+
+                    return CategoryCard(
+                      categoryName: name,
+                      totalSpent: double.parse(formattedTotal), // 👈 clean formatted value
+                      icon: icon,
+                      color: Colors.teal,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => CategoryChartPage(categoryName: name),
+                          ),
+                        );
+                      },
+                      textColor: textColor,
+                    );
+                  },
+
               ),
             ),
 

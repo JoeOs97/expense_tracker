@@ -44,12 +44,20 @@ class IsarService {
       });
     }
   }
+  // In IsarService
+  // filtering categories depending on expense or income
+  Future<List<Category>> getExpenseCategories() async {
+    return await isar.categorys
+        .filter()
+        .typeEqualTo(CategoryType.expense)
+        .findAll();
+  }
 
-
-  Future<void> addCategory(Category category) async {
-    await isar.writeTxn(() async {
-      await isar.categorys.put(category);
-    });
+  Future<List<Category>> getIncomeCategories() async {
+    return await isar.categorys
+        .filter()
+        .typeEqualTo(CategoryType.income)
+        .findAll();
   }
 
   Future<void> addExpense(Expense expense) async {
@@ -59,13 +67,10 @@ class IsarService {
     });
   }
 
-  Future<List<Category>> getCategories() async {
-    return await isar.categorys.where().findAll();
-  }
-
   Future<List<Expense>> getExpenses() async {
     return await isar.expenses.where().findAll();
   }
+
   Future<void> deleteExpense(int id) async {
     await isar.writeTxn(() async {
       // Delete by ID using the collection

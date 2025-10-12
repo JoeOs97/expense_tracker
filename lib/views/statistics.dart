@@ -73,7 +73,7 @@ class StatisticsView extends ConsumerWidget {
 
               const SizedBox(height: 16),
               SizedBox(
-                height: 300,
+                height: 350,
                 child: CategoryExpensesPieChart(
                   categoryExpenses: categoryExpenses,
                   categoryColors: categoryColors,
