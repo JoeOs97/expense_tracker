@@ -79,32 +79,21 @@ class TransactionCard extends StatelessWidget {
               const SizedBox(height: 4),
 
               // Row of buttons
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.edit, color: Colors.blueAccent, size: 20),
-                    onPressed: onUpdate,
-                    tooltip: 'Edit Transaction',
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.delete, color: Colors.redAccent, size: 20),
-                    onPressed: onDelete,
-                    tooltip: 'Delete Transaction',
-                  ),
-                ],
-              ),
-
-              // Small tag (Income or Expense)
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                decoration: BoxDecoration(
-                  color: isIncome ? Colors.green : Colors.red,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Text(
-                  isIncome ? "Income" : "Expense",
-                  style: const TextStyle(color: Colors.white, fontSize: 11),
+              Expanded(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.edit, color: Colors.blueAccent, size: 20),
+                      onPressed: onUpdate,
+                      tooltip: 'Edit Transaction',
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.delete, color: Colors.redAccent, size: 20),
+                      onPressed: onDelete,
+                      tooltip: 'Delete Transaction',
+                    ),
+                  ],
                 ),
               ),
             ],
