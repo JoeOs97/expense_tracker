@@ -1,16 +1,61 @@
-# expense_tracker
+# 💰 Expense Tracker Pro (Flutter)
 
-A new Flutter project.
+## 🚀 Overview
 
-## Getting Started
+A scalable expense tracking application built with Flutter, designed with clean architecture principles and state management best practices.
 
-This project is a starting point for a Flutter application.
+This project demonstrates how to structure a production-ready Flutter app using MVVM-like separation and modular design.
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 🧠 Tech Stack
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* Flutter
+* Dart
+* Local Database (SQLite)
+* Clean Architecture principles
+
+---
+
+## 🏗 Architecture
+
+The project is structured into:
+
+* **Core** → shared utilities
+* **Features** → modular business logic
+* **Data Layer** → local storage & models
+* **Presentation Layer** → UI
+
+---
+
+## ✨ Features
+
+* Add and manage expenses
+* Categorize transactions
+* View expense history
+* Theme switching
+* Scalable structure for future API integration
+
+---
+
+## 🔥 Highlights
+
+* Modular architecture (feature-based)
+* Clean separation of concerns
+* Ready for backend integration
+* Designed for scalability
+
+---
+
+## 📸 Screenshots
+
+(Add your screenshots here)
+
+---
+
+## 📦 Future Improvements
+
+* API integration
+* Pagination
+* Authentication
+* Cloud sync
